@@ -17,9 +17,19 @@ class Bar
     return @drinks_in_bar.find{|drink| drink.get_drink_name() == drink_name}
   end
 
-  def sell_drink_by_name(drink_name)
-    found_drink = @drinks_in_bar.find{|drink| drink.get_drink_name() == drink_name}
-    return @drinks_in_bar.delete(found_drink)
+  def check_customer_age(guest)
+    if guest.age > 18
+      return true
+    else
+      return false
+    end
+  end
+
+  def sell_drink_by_name(drink_name, guest)
+    if check_customer_age(guest)
+      found_drink = @drinks_in_bar.find{|drink| drink.get_drink_name() == drink_name}
+      return @drinks_in_bar.delete(found_drink)
+    end
   end
 
   def take_customer_money(amount)

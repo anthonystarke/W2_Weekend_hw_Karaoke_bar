@@ -34,9 +34,13 @@ class Guest
   end
 
   def buy_a_drink(bar,name)
-    @drink = bar.sell_drink_by_name(name)
-    @wallet -= @drink.get_drink_price()
-    bar.take_customer_money(@drink.get_drink_price())
+    if bar.look_for_drink(name)
+      @drink = bar.sell_drink_by_name(name,self)
+      @wallet -= @drink.get_drink_price()
+      bar.take_customer_money(@drink.get_drink_price())
+    else
+      return "We dont have that drink"
+    end
   end
 
 end

@@ -30,7 +30,6 @@ class Minitest::Test
   end
 
   def test_number_of_songs_in_room
-    # @room.add_song_to_playlist(@song)
     assert_equal(0,@room.number_of_songs)
   end
 
