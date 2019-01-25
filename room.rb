@@ -36,12 +36,26 @@ class Room
   end
 
   def check_guest_in(new_guest)
-    if check_guest_can_afford(new_guest) == true && @capacity > @guests_in_room.count
-      new_guest.reduce_money(@entry_fee)
-      @total_money += @entry_fee
-      @guests_in_room << new_guest
-      new_guest.check_for_fav_song(@songs_in_playlist)
+    if space_in_room()
+      if check_guest_can_afford(new_guest) == true
+        new_guest.reduce_money(@entry_fee)
+        @total_money += @entry_fee
+        @guests_in_room << new_guest
+        new_guest.check_for_fav_song(@songs_in_playlist)
+      else
+        return "Sorry need more money"
+      end
+    else
+      return "No Space left"
     end
+
+  end
+
+  def space_in_room
+    if @capacity > @guests_in_room.count
+      return true
+    end
+    return false
   end
 
   def return_total_money
@@ -59,5 +73,9 @@ class Room
     @guests_in_room.delete(guest)
   end
 
+  def remove_song_from_playlist(name_of_song)
+    song_to_remove = @songs_in_playlist.find {|song| song.title == name_of_song}
+    @songs_in_playlist.delete(song_to_remove)
+  end
 
 end
