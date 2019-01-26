@@ -102,9 +102,18 @@ class Minitest::Test
     assert_equal(false,@room.space_in_room)
   end
 
-  # def test_not_enoug_money_message
-  #   guest_5 = Guest.new("Debby",25,10,"This Way")
-  #   assert_equal("Sorry need more money",@room.check_guest_in(guest_5))
-  # end
+  def test_list_of_guests
+    @room.check_guest_in(@guest_1)
+    new_array = []
+    new_array << @guest_1
+    assert_equal(new_array,@room.return_guest_list)
+  end
+
+  def test_list_of_songs_via_title
+    @room.add_song_to_playlist(@song_1)
+    new_array = []
+    new_array << "My Way"
+    assert_equal(new_array, @room.return_all_songs_via_title)
+  end
 
 end

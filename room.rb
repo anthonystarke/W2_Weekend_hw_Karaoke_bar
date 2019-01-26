@@ -27,6 +27,10 @@ class Room
     return @songs_in_playlist
   end
 
+  def return_all_songs_via_title
+    return @songs_in_playlist.map{|song| song.title}
+  end
+
   def clear_playlist
     @songs_in_playlist.clear
   end
@@ -56,6 +60,10 @@ class Room
       return true
     end
     return false
+  end
+
+  def return_guest_list
+    return @guests_in_room
   end
 
   def check_out_guest(guest)
