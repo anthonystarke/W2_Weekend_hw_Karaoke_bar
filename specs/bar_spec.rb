@@ -14,7 +14,7 @@ class Minitest::Test
       alcohol_percent: 40
     }
 
-    @bar = Bar.new()
+    @bar = Bar.new(25)
     @drink_1 = Drink.new(@drink_details)
     @guest_1 = Guest.new("John",21,140,"Eye of the Tiger")
     @guest_2 = Guest.new("James",16,140,"Eye of the Tiger")
@@ -49,6 +49,10 @@ class Minitest::Test
 
   def test_check_guest_age__false
     assert_equal(false, @bar.check_customer_age(@guest_2))
+  end
+
+  def test_check_customer_can_afford_entry
+      assert_equal(true,@bar.check_guest_can_afford(@guest_1))
   end
 
 end

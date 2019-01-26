@@ -13,7 +13,8 @@ class Minitest::Test
     @guest_2 = Guest.new("Josh",25,100,"My Way")
     @guest_3 = Guest.new("Gerry",25,100,"My Way")
     @guest_4 = Guest.new("Gabe",25,100,"My Way")
-    @song = Song.new("My Way")
+    @song_1 = Song.new("My Way")
+    @song_2 = Song.new("Time Warp")
   end
 
   def test_room_capacity
@@ -34,7 +35,7 @@ class Minitest::Test
   end
 
   def test_add_song_to_playlist
-    @room.add_song_to_playlist(@song)
+    @room.add_song_to_playlist(@song_1)
     assert_equal(1,@room.number_of_songs)
   end
 
@@ -58,14 +59,14 @@ class Minitest::Test
     assert_equal(1,@room.guests_in_room_checker)
   end
 
-  def test_guest_can_affort
-    assert_equal(true, @room.check_guest_can_afford(@guest_1))
-  end
+  # def test_guest_can_affort
+  #   assert_equal(true, @room.check_guest_can_afford(@guest_1))
+  # end
 
-  def test_room_total_money
-    @room.check_guest_in(@guest_1)
-    assert_equal(25,@room.return_total_money)
-  end
+  # def test_room_total_money
+  #   @room.check_guest_in(@guest_1)
+  #   assert_equal(25,@room.return_total_money)
+  # end
 
   def test_remove_guest_from_room
     @room.check_guest_in(@guest_1)
@@ -74,25 +75,12 @@ class Minitest::Test
   end
 
   def test_check_customer_fav_song
-    @room.add_song_to_playlist(@song)
+    @room.add_song_to_playlist(@song_1)
     assert_equal("WHoo",@room.check_guest_in(@guest_1))
   end
 
-  def test_room_capacity_vs_guest_count
-    @room.check_guest_in(@guest_1)
-    @room.check_guest_in(@guest_2)
-    @room.check_guest_in(@guest_3)
-    @room.check_guest_in(@guest_4)
-    @room.check_guest_in(@guest_1)
-    @room.check_guest_in(@guest_2)
-    @room.check_guest_in(@guest_3)
-    @room.check_guest_in(@guest_4)
-    @room.check_guest_in(@guest_1)
-    assert_equal(8,@room.guests_in_room_checker)
-  end
-
   def test_removing_specific_song
-    @room.add_song_to_playlist(@song)
+    @room.add_song_to_playlist(@song_1)
     assert_equal(1,@room.number_of_songs)
     @room.remove_song_from_playlist("My Way")
     assert_equal(0,@room.number_of_songs)
@@ -114,21 +102,9 @@ class Minitest::Test
     assert_equal(false,@room.space_in_room)
   end
 
-  def test_not_enoug_money_message
-    guest_5 = Guest.new("Debby",25,10,"This Way")
-    assert_equal("Sorry need more money",@room.check_guest_in(guest_5))
-  end
-
-  def test_no_space_message
-    @room.check_guest_in(@guest_1)
-    @room.check_guest_in(@guest_2)
-    @room.check_guest_in(@guest_3)
-    @room.check_guest_in(@guest_4)
-    @room.check_guest_in(@guest_1)
-    @room.check_guest_in(@guest_2)
-    @room.check_guest_in(@guest_3)
-    @room.check_guest_in(@guest_4)
-    assert_equal("No Space left",@room.check_guest_in(@guest_4))
-  end
+  # def test_not_enoug_money_message
+  #   guest_5 = Guest.new("Debby",25,10,"This Way")
+  #   assert_equal("Sorry need more money",@room.check_guest_in(guest_5))
+  # end
 
 end

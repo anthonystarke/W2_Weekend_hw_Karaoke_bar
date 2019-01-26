@@ -36,19 +36,8 @@ class Room
   end
 
   def check_guest_in(new_guest)
-    if space_in_room()
-      if check_guest_can_afford(new_guest) == true
-        new_guest.reduce_money(@entry_fee)
-        @total_money += @entry_fee
-        @guests_in_room << new_guest
-        new_guest.check_for_fav_song(@songs_in_playlist)
-      else
-        return "Sorry need more money"
-      end
-    else
-      return "No Space left"
-    end
-
+    @guests_in_room << new_guest
+    new_guest.check_for_fav_song(@songs_in_playlist)
   end
 
   def space_in_room
