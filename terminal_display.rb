@@ -52,24 +52,37 @@ def start_initialize()
 end
 
   def create_a_room()
-    p "How many people do you want to allow in?"
+    system "clear"
+    p "Creating a new room:"
+    p "List of Rooms available"
+    @bar.return_all_rooms.each_with_index do |room,index|
+      p "Room: #{index+1} has #{room.capacity} capacity and #{room.capacity.to_i - room.guests_in_room_checker.to_i} Available slots"
+    end
+    p "How many people do you want to allow in to this room?"
     room_capacity = gets.chomp()
     return if room_capacity.empty?
-    @room_array[@room_array.count()] = Room.new(room_capacity,0)
-    @bar.add_room_to_bar(@room_array[@room_array.count()-1])
+    # @room_array[@room_array.count()] = Room.new(room_capacity,0)
+    new_room = Room.new(room_capacity,0)
+    @bar.add_room_to_bar(new_room)
   end
 
   def delete_a_room()
+    system "clear"
+    p "Deleting room - only 1 at a time"
     @bar.return_all_rooms.each_with_index do |room,index|
       p "Option: #{index+1} has #{room.capacity} capacity and #{room.capacity.to_i - room.guests_in_room_checker.to_i} Available slots"
     end
+
     if @bar.rooms_in_bar_counter >= 2
       p "Which room would you like to delete"
-      key_input = gets.chomp()
       @bar.return_all_rooms.each_with_index do |room,index|
-        p "#{index+1} Delete Room #{index+1}"
+        p "Press #{index+1} to Delete Room #{index+1}"
       end
 
+      key_input = gets.chomp()
+      @room_array = @bar.return_all_rooms()
+      @bar.remove_room(@room_array[(key_input.to_i)-1])
+      @room_array.delete((key_input.to_i)-1)
 
     elsif @bar.rooms_in_bar_counter == 1
       p "1: To delete the this room"
@@ -78,8 +91,9 @@ end
 
       case key_input
       when "1"
-        @bar.remove_room(@room_array[0])
-        @room_array.clear()
+        room_to_delete = @bar.return_all_rooms()
+        @bar.remove_room(room_to_delete[0])
+
       when "q"
         return
       end
@@ -97,6 +111,7 @@ def main_loop()
   key_input = ""
 
   while(key_input != "quit")
+    system "clear"
     p "Below is your Bar's details"
     p "#{@bar.rooms_in_bar_counter()} Rooms"
 
