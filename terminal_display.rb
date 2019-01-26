@@ -5,51 +5,51 @@ require_relative('./song.rb')
 require_relative('./room.rb')
 
 
-def start_initialize()
-  @room_array = []
+  def start_initialize()
+    @room_array = []
+    @guests_in_queue_array = []
+    @guest_1 = Guest.new("James",34,100,"One more Time")
+    @guest_2 = Guest.new("Sarah",28,100,"Let's dance")
+    @guest_3 = Guest.new("Clair",41,100,"Up Up")
+    @song_1 = Song.new("One more Time")
+    @song_2 = Song.new("Let's dance")
+    @song_3 = Song.new("Up Up")
 
-  @guest_1 = Guest.new("James",34,100,"One more Time")
-  @guest_2 = Guest.new("Sarah",28,100,"Let's dance")
-  @guest_3 = Guest.new("Clair",41,100,"Up Up")
-  @song_1 = Song.new("One more Time")
-  @song_2 = Song.new("Let's dance")
-  @song_3 = Song.new("Up Up")
+    drink_1_details = {
+      name: "Wine",
+      price: 3,
+      alcohol_percent: 3
+    }
 
-  drink_1_details = {
-    name: "Wine",
-    price: 3,
-    alcohol_percent: 3
-  }
+    drink_2_details = {
+      name: "Beer",
+      price: 4,
+      alcohol_percent: 5
+    }
 
-  drink_2_details = {
-    name: "Beer",
-    price: 4,
-    alcohol_percent: 5
-  }
+    drink_3_details = {
+      name: "Cider",
+      price: 3,
+      alcohol_percent: 3
+    }
 
-  drink_3_details = {
-    name: "Cider",
-    price: 3,
-    alcohol_percent: 3
-  }
+    @drink_1 = Drink.new(drink_1_details)
+    @drink_2 = Drink.new(drink_2_details)
+    @drink_3 = Drink.new(drink_3_details)
 
-  @drink_1 = Drink.new(drink_1_details)
-  @drink_2 = Drink.new(drink_2_details)
-  @drink_3 = Drink.new(drink_3_details)
+    @bar = Bar.new(25)
+    @room_1 = Room.new(2,0)
+    @room_2 = Room.new(4,0)
+    @room_3 = Room.new(6,0)
 
-  @bar = Bar.new(25)
-  @room_1 = Room.new(2,0)
-  @room_2 = Room.new(4,0)
-  @room_3 = Room.new(6,0)
+    @bar.add_drink_to_bar(@drink_1)
+    @bar.add_drink_to_bar(@drink_2)
+    @bar.add_drink_to_bar(@drink_3)
 
-  @bar.add_drink_to_bar(@drink_1)
-  @bar.add_drink_to_bar(@drink_2)
-  @bar.add_drink_to_bar(@drink_3)
-
-  @room_1.add_song_to_playlist(@song_1)
-  @room_2.add_song_to_playlist(@song_2)
-  @room_3.add_song_to_playlist(@song_3)
-end
+    @room_1.add_song_to_playlist(@song_1)
+    @room_2.add_song_to_playlist(@song_2)
+    @room_3.add_song_to_playlist(@song_3)
+  end
 
   def create_a_room()
     system "clear"
@@ -103,6 +103,29 @@ end
 
   end
 
+  def create_a_guest()
+
+    system "clear"
+    p "Creating a guest: "
+    p "Lets choose a name "
+    name = gets.chomp()
+    system "clear"
+    p "How old is #{name}:"
+    age = gets.chomp()
+    system "clear"
+    p "How much money is #{name} getting:"
+    money = gets.chomp()
+    system "clear"
+    p "What is #{name}'s favourite song:"
+    song = gets.chomp()
+    new_guest = Guest.new(name,age,money,song)
+    @guests_in_queue_array << new_guest
+    system "clear"
+    p "Exellent, your Guest has been created and added to the queue to go into the bar"
+    p "Press Enter to go back to main menu"
+    gets.chomp()
+  end
+
 def main_loop()
   system "clear"
   p "Welcome to Karaoke"
@@ -122,10 +145,14 @@ def main_loop()
     end
 
     p "#{@bar.total_money} Money"
+    p "#{@guests_in_queue_array.count} guest in queue" if @guests_in_queue_array.count == 1 
+    p "#{@guests_in_queue_array.count} guests in queue" if @guests_in_queue_array.count >= 2
+
     puts ""
     p "Choose an option"
     p "1: Create a room"
     p "2: Delete a room"
+    p "3: Create a guest"
 
     key_input = gets.chomp().downcase()
 
@@ -134,6 +161,8 @@ def main_loop()
       create_a_room()
     when "2"
       delete_a_room()
+    when "3"
+      create_a_guest()
     else
     end
 

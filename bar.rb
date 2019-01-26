@@ -7,6 +7,7 @@ class Bar
     @total_money = 0
     @entry_fee = entry_fee
     @rooms_in_bar = []
+    @guests_in_bar = []
   end
 
   def add_drink_to_bar(drink)
