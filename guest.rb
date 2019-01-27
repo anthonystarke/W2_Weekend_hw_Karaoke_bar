@@ -1,6 +1,6 @@
 class Guest
 
-  attr_reader :name, :age
+  attr_reader :name, :age, :drink
 
   def initialize(name,age,wallet,favourite_song)
     @name = name
@@ -33,13 +33,17 @@ class Guest
     return false
   end
 
-  def buy_a_drink(bar,name)
-    if bar.look_for_drink(name)
-      @drink = bar.sell_drink_by_name(name,self)
-      @wallet -= @drink.get_drink_price()
-      bar.take_customer_money(@drink.get_drink_price())
+  def buy_a_drink(bar,drink_name)
+    if @drink == 0
+      if bar.look_for_drink(name)
+        @drink = bar.sell_drink_by_name(name,self)
+        @wallet -= @drink.get_drink_price()
+        bar.take_customer_money(@drink.get_drink_price())
+      else
+        return "We dont have that drink"
+      end
     else
-      return "We dont have that drink"
+      return "I already have a drink"
     end
   end
 

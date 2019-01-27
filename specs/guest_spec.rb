@@ -9,16 +9,23 @@ class Minitest::Test
 
   def setup
 
-    @drink_details = {
+    @drink_details_1 = {
       name: "Whiskey",
+      price: 2,
+      alcohol_percent: 40
+    }
+    @drink_details_2 = {
+      name: "Wine",
       price: 2,
       alcohol_percent: 40
     }
 
     @guest = Guest.new("John",21,140,"Eye of the Tiger")
     @bar = Bar.new(20)
-    @drink_1 = Drink.new(@drink_details)
+    @drink_1 = Drink.new(@drink_details_1)
+    @drink_2 = Drink.new(@drink_details_2)
     @bar.add_drink_to_bar(@drink_1)
+    @bar.add_drink_to_bar(@drink_2)
 
   end
 
@@ -63,5 +70,7 @@ class Minitest::Test
   def test_return_guest_has_drink__false
     assert_equal(false, @guest.has_drink)
   end
+
+
 
 end

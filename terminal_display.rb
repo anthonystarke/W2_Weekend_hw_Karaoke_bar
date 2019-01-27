@@ -8,6 +8,8 @@ require_relative('./room.rb')
   def start_initialize()
     @room_array = []
     @guests_in_queue_array = []
+    @songs_in_queue_array = []
+
     @guest_1 = Guest.new("James",34,100,"One more Time")
     @guest_2 = Guest.new("Sarah",28,100,"Let's dance")
     @guest_3 = Guest.new("Clair",41,100,"Up Up")
@@ -38,9 +40,9 @@ require_relative('./room.rb')
     @drink_3 = Drink.new(drink_3_details)
 
     @bar = Bar.new(25)
-    @room_1 = Room.new(2,0)
-    @room_2 = Room.new(4,0)
-    @room_3 = Room.new(6,0)
+    @room_1 = Room.new(2)
+    @room_2 = Room.new(4)
+    @room_3 = Room.new(6)
 
     @bar.add_drink_to_bar(@drink_1)
     @bar.add_drink_to_bar(@drink_2)
@@ -126,6 +128,33 @@ require_relative('./room.rb')
     gets.chomp()
   end
 
+  def create_a_song()
+    system "clear"
+    p "What will we call the song"
+    song_name = gets.chomp()
+    new_song = Song.new(song_name)
+    @songs_in_queue_array << new_song
+    system "clear"
+    p "Song called --> '#{song_name}' has been created and added to the song queue to be added to a room"
+    p "Press Enter to head back to main menu"
+    gets.chomp()
+
+  end
+
+  def add_items_to_room()
+    system "clear"
+    p "#{@bar.rooms_in_bar_counter()} Rooms"
+    if @bar.rooms_in_bar_counter > 0
+      @bar.return_all_rooms.each_with_index do |room,index|
+        p "Room: #{index+1} has #{room.capacity} capacity and #{room.capacity.to_i - room.guests_in_room_checker.to_i} Available slots"
+      end
+    else
+      p "No rooms created, head back and make some - Press Enter to head back"
+    end
+    p "Choose room"
+    key_input = gets.chomp()
+  end
+
 def main_loop()
   system "clear"
   p "Welcome to Karaoke"
@@ -145,14 +174,19 @@ def main_loop()
     end
 
     p "#{@bar.total_money} Money"
-    p "#{@guests_in_queue_array.count} guest in queue" if @guests_in_queue_array.count == 1 
+    p "#{@guests_in_queue_array.count} guest in queue" if @guests_in_queue_array.count == 1
     p "#{@guests_in_queue_array.count} guests in queue" if @guests_in_queue_array.count >= 2
+
+    p "#{@songs_in_queue_array.count} song in queue" if @songs_in_queue_array.count == 1
+    p "#{@songs_in_queue_array.count} songs in queue" if @songs_in_queue_array.count >= 2
 
     puts ""
     p "Choose an option"
     p "1: Create a room"
     p "2: Delete a room"
     p "3: Create a guest"
+    p "4: Create a song"
+    p "5: Adding Items to room"
 
     key_input = gets.chomp().downcase()
 
@@ -163,7 +197,10 @@ def main_loop()
       delete_a_room()
     when "3"
       create_a_guest()
-    else
+    when "4"
+      create_a_song()
+    when "5"
+      add_items_to_room()
     end
 
   end
