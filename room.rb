@@ -3,7 +3,7 @@ class Room
   attr_reader :capacity, :entry_fee
   # attr_writer :entry_fee
 
-  def initialize(capacity,entry_fee)
+  def initialize(capacity)
     @capacity = capacity
     @entry_fee = entry_fee
     @guests_in_room = []

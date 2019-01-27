@@ -9,7 +9,7 @@ class Minitest::Test
   end
 
   def test_song_name
-    assert_equal("Eye Of the tiger",@song.title)
+    assert_equal("Eye of the Tiger",@song.title)
   end
 
 end

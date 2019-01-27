@@ -16,7 +16,7 @@ class Minitest::Test
     }
 
     @guest = Guest.new("John",21,140,"Eye of the Tiger")
-    @bar = Bar.new()
+    @bar = Bar.new(20)
     @drink_1 = Drink.new(@drink_details)
     @bar.add_drink_to_bar(@drink_1)
 

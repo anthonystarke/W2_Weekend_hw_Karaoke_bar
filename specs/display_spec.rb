@@ -12,9 +12,10 @@ class Minitest::Test
   def setup
 
     @guest_1 = Guest.new("John",30,200,"Yeah Yeah Yeah")
-    @room_1 = Room.new(5,0)
+    @room_1 = Room.new(5)
     @song_1 = Song.new("Yeah Yeah Yeah")
     @display = Display.new()
+    @bar = Bar.new(25)
 
   end
 
@@ -43,8 +44,16 @@ class Minitest::Test
     @room_1.add_song_to_playlist(@song_1)
     new_array = []
     new_array << "Yeah Yeah Yeah"
-    assert_equal(new_array,@display.display_playlist_list(@room_1))
+    assert_equal(new_array,@display.display_playlist_list_via_title(@room_1))
   end
 
+  def test_display_number_of_rooms
+    @bar.add_room_to_bar(@room_1)
+    assert_equal(1,@display.display_number_of_rooms(@bar))
+  end
+
+  def test_print_message
+    assert_equal("Hello World",@display.display_message("Hello World"))
+  end
 
 end

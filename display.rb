@@ -23,6 +23,12 @@ class Display
     p room.return_all_songs_via_title
   end
 
+  def display_number_of_rooms(bar)
+    p bar.rooms_in_bar_counter()
+  end
 
+  def display_message(message)
+    p message
+  end
 
 end

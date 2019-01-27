@@ -8,7 +8,7 @@ class Minitest::Test
 
   def setup
 
-    @room = Room.new(8,25)
+    @room = Room.new(8)
     @guest_1 = Guest.new("Johny",25,100,"My Way")
     @guest_2 = Guest.new("Josh",25,100,"My Way")
     @guest_3 = Guest.new("Gerry",25,100,"My Way")
@@ -19,10 +19,6 @@ class Minitest::Test
 
   def test_room_capacity
     assert_equal(8,@room.capacity)
-  end
-
-  def test_entry_fee
-    assert_equal(25,@room.entry_fee)
   end
 
   def test_change_entry_fee

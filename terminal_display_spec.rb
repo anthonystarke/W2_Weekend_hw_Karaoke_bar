@@ -40,9 +40,9 @@ class Minitest::Test
     @drink_3 = Drink.new(drink_3_details)
 
     @bar = Bar.new(25)
-    @room_1 = Room.new(2,0)
-    @room_2 = Room.new(4,0)
-    @room_3 = Room.new(6,0)
+    @room_1 = Room.new(2)
+    @room_2 = Room.new(4)
+    @room_3 = Room.new(6)
 
     @bar.add_drink_to_bar(@drink_1)
     @bar.add_drink_to_bar(@drink_2)
