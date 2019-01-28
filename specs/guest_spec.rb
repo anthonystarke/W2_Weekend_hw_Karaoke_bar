@@ -71,6 +71,4 @@ class Minitest::Test
     assert_equal(false, @guest.has_drink)
   end
 
-
-
 end

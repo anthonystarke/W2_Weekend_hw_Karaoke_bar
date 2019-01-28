@@ -64,7 +64,7 @@ require_relative('./room.rb')
     room_capacity = gets.chomp()
     return if room_capacity.empty?
     # @room_array[@room_array.count()] = Room.new(room_capacity,0)
-    new_room = Room.new(room_capacity,0)
+    new_room = Room.new(room_capacity)
     @bar.add_room_to_bar(new_room)
   end
 
@@ -139,6 +139,10 @@ require_relative('./room.rb')
     p "Press Enter to head back to main menu"
     gets.chomp()
 
+  end
+
+  def room_select_add(room)
+    
   end
 
   def add_items_to_room()
